@@ -1,0 +1,11 @@
+
+POST http://localhost:3000/users/create
+Content-Type: application/json
+
+{
+  "username": "ABC"
+}
+
+###
+
+GET http://localhost:3000/users/ABC
