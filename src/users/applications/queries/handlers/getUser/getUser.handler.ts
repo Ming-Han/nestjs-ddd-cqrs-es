@@ -10,7 +10,7 @@ export class GetUserHandler implements IQueryHandler<GetUserQuery> {
   constructor(private userRepo: UserRepo) {}
 
   async execute(query: GetUserQuery): Promise<any> {
-    console.log(clc.cyanBright('Running GetUserUseCase...'));
+    console.log(clc.cyanBright('GetUserQuery...'));
     const { getUserDTO: dto } = query;
     const [username, usernameError] = UserName.create({ name: dto.username });
     if (usernameError) {
