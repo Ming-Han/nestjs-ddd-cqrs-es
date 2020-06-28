@@ -4,12 +4,13 @@ import { GetUserQuery } from '../../impl/getUser.query';
 import { UserRepo } from 'src/users/repos/impl/userRepo.repo';
 import { UserName } from 'src/users/domain/userName.valueObject';
 import { HttpStatus, HttpException } from '@nestjs/common';
+import { GetUserResDTO } from './getUserRes.dto';
 
 @QueryHandler(GetUserQuery)
 export class GetUserHandler implements IQueryHandler<GetUserQuery> {
   constructor(private userRepo: UserRepo) {}
 
-  async execute(query: GetUserQuery): Promise<any> {
+  async execute(query: GetUserQuery): Promise<GetUserResDTO> {
     console.log(clc.cyanBright('GetUserQuery...'));
     const { getUserDTO: dto } = query;
     const [username, usernameError] = UserName.create({ name: dto.username });
@@ -29,7 +30,7 @@ export class GetUserHandler implements IQueryHandler<GetUserQuery> {
     }
 
     return {
-      id: user.userId.id.toValue(),
+      id: user.userId.id.toValue() as string,
       username: user.username.value,
     };
   }

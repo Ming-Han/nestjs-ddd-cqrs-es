@@ -1,5 +1,4 @@
 import { ValueObject } from 'src/core/domain/valueObject';
-import { Result } from 'src/core/result';
 
 interface IUserName {
   name: string;
@@ -29,10 +28,6 @@ export class UserName extends ValueObject<IUserName> {
 
   public static create(props: IUserName): [UserName, Error] {
     const [error, message] = UserName.validation(props.name);
-
-    // if (error) return Result.fail<UserName>(message);
-
-    // return Result.ok<UserName>(new UserName(props));
 
     if (error) return [null, new Error(message)];
 

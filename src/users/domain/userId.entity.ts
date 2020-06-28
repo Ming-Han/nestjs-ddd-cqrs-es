@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Entity } from 'src/core/domain/entity';
 import { UniqueEntityID } from 'src/core/domain/uniqueEntityID';
-import { Result } from 'src/core/result';
 
-@Injectable()
 export class UserId extends Entity<any> {
   get id(): UniqueEntityID {
     return this._id;
@@ -13,7 +11,7 @@ export class UserId extends Entity<any> {
     super(null, id);
   }
 
-  public static create(id?: UniqueEntityID): Result<UserId> {
-    return Result.ok<UserId>(new UserId(id));
+  public static create(id?: UniqueEntityID): [UserId, Error] {
+    return [new UserId(id), null];
   }
 }

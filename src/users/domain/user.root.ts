@@ -10,7 +10,8 @@ interface IUser {
 
 export class User extends AggregateRoot<IUser> {
   get userId(): UserId {
-    return UserId.create(this._id).getValue();
+    const [userId] = UserId.create(this._id);
+    return userId;
   }
 
   get username(): UserName {
